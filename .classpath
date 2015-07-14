@@ -13,5 +13,7 @@
 	<classpathentry kind="lib" path="lib/logback-classic-0.9.30.jar"/>
 	<classpathentry kind="lib" path="lib/logback-core-0.9.30.jar"/>
 	<classpathentry kind="lib" path="lib/slf4j-api-1.6.0.jar"/>
+	<classpathentry kind="lib" path="D:/Program Files (x86)/Tesseract-OCR/java/jai_imageio-1.1-alpha.jar"/>
+	<classpathentry kind="lib" path="D:/Program Files (x86)/Tesseract-OCR/java/swingx-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
