@@ -8,7 +8,7 @@ public class TestOCR {
      * @param args 
      */  
     public static void main(String[] args) {  
-        String path = "d://222.jpg";  
+        String path = "E:\\workspace\\RegisterPlugin\\check_img.jpg";  
         try {  
             String valCode = new OCR().recognizeText(new File(path), "jpg");  
             System.out.println(valCode);  
