@@ -35,7 +35,7 @@ public class FormCommit {
 		String url = "http://www.nm12320.com/userRegister.jspx";
 
 		List<BasicNameValuePair> data = new ArrayList<BasicNameValuePair>();
-		data.add(new BasicNameValuePair("user_id", "98984250"));
+		data.add(new BasicNameValuePair("user_id", "zhangsan001")); //98984252
 		data.add(new BasicNameValuePair("user_password", "123123"));
 		data.add(new BasicNameValuePair("user_repassword", "123123"));
 		data.add(new BasicNameValuePair("user_name", "123123"));
@@ -44,7 +44,7 @@ public class FormCommit {
 		data.add(new BasicNameValuePair("idTypeId", "1"));
 		data.add(new BasicNameValuePair("idcard_num", "440901197709194316"));
 		data.add(new BasicNameValuePair("birthday", "1977-09-19"));
-		data.add(new BasicNameValuePair("tel", "18612341234"));
+		data.add(new BasicNameValuePair("tel", "15201642315"));
 		data.add(new BasicNameValuePair("captcha", valCode));
 		data.add(new BasicNameValuePair("agree", "1"));
 		String body = HttpClientUtil.doPost(url, "", data);
