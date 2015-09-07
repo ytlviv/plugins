@@ -102,7 +102,7 @@ public final class HttpClientUtil {
 						}
 						
 						String b=doGet(v,null,null);
-						System.out.println(b);
+//						System.out.println(b);
 						return v;
 					}
 				}

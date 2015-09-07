@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -80,34 +81,74 @@ public class FormCommit1 {
 		String loginUrl="http://www.gsyygh.com/arweb/userinfo/userlogin_login.action";
 		
 		List<BasicNameValuePair> lg = new ArrayList<BasicNameValuePair>();
-		lg.add(new BasicNameValuePair("userName", "zhangsan006"));
+		lg.add(new BasicNameValuePair("userName", "zhangsan007"));
 		lg.add(new BasicNameValuePair("userPassword", "123123"));
 		lg.add(new BasicNameValuePair("loginTime", System.currentTimeMillis()+""));
 		
 		String lgBody = HttpClientUtil.doPost(loginUrl, jsid, lg);
 		
-		System.out.println(lgBody);
+//		System.out.println(lgBody);
+		
+		String doctor_code="4028818d314aab6a0131c2182e682deb";
+		String hospital_code="srmyy";
+		String order_date="2015-09-14";
+		String order_week=URLEncoder.encode("星期一","UTF-8");
+		String zz_ks=URLEncoder.encode("中医妇科","UTF-8");
+		String doctor_name=URLEncoder.encode("武权生","UTF-8");
+		
+//		String doctor_code="4028818d2834c6e701283e46f2231350";
+//		String hospital_code="srmyy";
+//		String order_date="2015-09-14";
+//		String order_week=URLEncoder.encode("星期一","UTF-8");
+//		String zz_ks=URLEncoder.encode("普外科（专）","UTF-8");
+//		String doctor_name=URLEncoder.encode("李荣范","UTF-8");
+		
+		String url2="http://www.gsyygh.com/arweb/doctor.jsp?doctor="+doctor_code+"&order_data="+order_date+"&sort=am&hospital="+hospital_code;
+		
+		String bb=HttpClientUtil.doGet(url2, null,null);
+		
+		System.out.println("==================");
+		System.out.println(bb);
+		System.out.println("******************");
+		
+		
+		int a=bb.indexOf("<input type=\"radio\"style=\"cursor:hand\"  name=\"order_config_code\" checked==true  value=\"");
+		String num1="";
+		if(a==-1){
+			System.out.println("没有得到order_code数据");
+			int aa=bb.indexOf("<input type=\"radio\"style=\"cursor:hand\"  name=\"order_config_code\"");
+			bb=bb.substring(aa,aa+200);			
+			int c=bb.indexOf("value=");
+			if(c==-1)
+				return;
+			
+			num1=bb.substring(c+7,c+7+7);
+		}else{
+			num1=bb.substring(a+87,a+87+7);
+		}
+		
+		System.out.println(num1);
 		
 		String url1="http://www.gsyygh.com/arweb/orderpak/order_order.action";
 		
 		List<BasicNameValuePair> data1 = new ArrayList<BasicNameValuePair>();
 		data1.add(new BasicNameValuePair("symptom", ""));
 		data1.add(new BasicNameValuePair("symptomname", "")); //98984252
-		data1.add(new BasicNameValuePair("doctor_name", "%E5%88%98%E6%85%A7%E6%B0%91"));
-		data1.add(new BasicNameValuePair("doctor_code", "40284bd14d275dec014d2768d83b0014"));
+		data1.add(new BasicNameValuePair("doctor_name", doctor_name));
+		data1.add(new BasicNameValuePair("doctor_code", doctor_code));
 		data1.add(new BasicNameValuePair("order_ip", "127.0.0.1"));
-		data1.add(new BasicNameValuePair("order_code", "3961508"));
-		data1.add(new BasicNameValuePair("order_date", "2015-08-03"));
-		data1.add(new BasicNameValuePair("hospital_code", "gsfybjy"));
-		data1.add(new BasicNameValuePair("order_week", "%E6%98%9F%E6%9C%9F%E4%B8%80"));
+		data1.add(new BasicNameValuePair("order_code", num1)); //4063945
+		data1.add(new BasicNameValuePair("order_date", order_date));
+		data1.add(new BasicNameValuePair("hospital_code", hospital_code));
+		data1.add(new BasicNameValuePair("order_week", order_week));
 		data1.add(new BasicNameValuePair("isyb", "0"));
-		data1.add(new BasicNameValuePair("zz_ks", "%E5%A5%B3%E6%80%A7%E6%95%B4%E5%BD%A2%E7%BE%8E%E5%AE%B9%E7%A7%91"));
-		data1.add(new BasicNameValuePair("order_name", "小老虎1"));
-		data1.add(new BasicNameValuePair("sex", "1"));
-		data1.add(new BasicNameValuePair("birthday", "1977-09-19"));
+		data1.add(new BasicNameValuePair("zz_ks", zz_ks));
+		data1.add(new BasicNameValuePair("order_name", "毕贵显"));
+		data1.add(new BasicNameValuePair("sex", "2"));
+		data1.add(new BasicNameValuePair("birthday", "1981-01-03"));
 		data1.add(new BasicNameValuePair("idcard", "idcard"));
-		data1.add(new BasicNameValuePair("idcard_num", "440901197709194316"));
-		data1.add(new BasicNameValuePair("tel", "18612341234"));
+		data1.add(new BasicNameValuePair("idcard_num", "620121198101031922"));
+		data1.add(new BasicNameValuePair("tel", "15101218583"));
 		data1.add(new BasicNameValuePair("isjz", ""));
 		
 		String body1 = HttpClientUtil.doPost(url1, jsid, data1);
